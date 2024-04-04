@@ -1,38 +1,41 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-int b, u, v, n, i, j, ne = 1;
-int visited[10] = {0}, min, mincost = 0, cost[10][10], a;
+#define MAX 10
+#define INF 999
+
+int b, u, v, n = 5, i, j, ne = 1;
+int visited[MAX] = {0}, min, mincost = 0, a;
+
+int cost[MAX][MAX] = {
+    {INF, 2, INF, 6, INF},
+    {2, INF, 3, 8, 5},
+    {INF, 3, INF, INF, 7},
+    {6, 8, INF, INF, 9},
+    {INF, 5, 7, 9, INF}
+};
 
 int main() {
-    system("clear");
-    printf("\nEnter the number of nodes: ");
-    scanf("%d", &n);
-    printf("\nEnter the adjacency matrix:\n");
-    for(i = 1; i <= n; i++)
-        for(j = 1; j <= n; j++) {
-            scanf("%d", &cost[i][j]);
-            if(cost[i][j] == 0)
-                cost[i][j] = 999;
-        }
-    visited[1] = 1;
-    printf("\n");
+    visited[1] = 1; // Start from node 1
+    printf("The edges of Minimum Cost Spanning Tree are\n");
+    
     while(ne < n) {
-        for(i = 1, min = 999; i <= n; i++)
-            for(j = 1; j <= n; j++)
-                if(cost[i][j] < min)
-                    if(visited[i] != 0) {
-                        min = cost[i][j];
-                        a = u = i;
-                        b = v = j;
-                    }
+        for(i = 0, min = INF; i < n; i++) {
+            for(j = 0; j < n; j++) {
+                if(cost[i][j] < min && visited[i] != 0) {
+                    min = cost[i][j];
+                    a = u = i;
+                    b = v = j;
+                }
+            }
+        }
         if(visited[u] == 0 || visited[v] == 0) {
-            printf("\nEdge %d:(%d %d) cost:%d", ne++, a, b, min);
+            printf("\nEdge %d:(%d %d) cost:%d", ne++, a+1, b+1, min);
             mincost += min;
             visited[b] = 1;
         }
-        cost[a][b] = cost[b][a] = 999;
+        cost[a][b] = cost[b][a] = INF; 
     }
-    printf("\nMinimum cost=%d", mincost);
+    printf("\nMinimum cost = %d\n", mincost);
     return 0;
 }

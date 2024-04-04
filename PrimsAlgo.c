@@ -20,7 +20,7 @@ int main() {
     visited[0] = 1;
     printf("The edges of Minimum Cost Spanning Tree are\n");
     
-    while(ne < n) {
+    while(ne < n-1) {
         for(i = 0, min = INF; i < n; i++) {
             for(j = 0; j < n; j++) {
                 if(cost[i][j] < min && visited[i] != 0 && visited[j] == 0) {

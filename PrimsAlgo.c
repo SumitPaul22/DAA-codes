@@ -4,17 +4,17 @@
 #define MAX 10
 #define INF 999
 
+int cost[MAX][MAX] = {
+    {INF, 2, INF, 6, INF},
+    {2, INF, 3, 8, 5},
+    {INF, 3, INF, INF, 7},
+    {6, 8, INF, INF, 9},
+    {INF, 5, 7, 9, INF}
+};
+
 int main() {
     int b, u, v, n = 5, i, j, ne = 1;
     int visited[MAX] = {0}, min, mincost = 0, a;
-
-    int cost[MAX][MAX] = {
-        {INF, 2, INF, 6, INF},
-        {2, INF, 3, 8, 5},
-        {INF, 3, INF, INF, 7},
-        {6, 8, INF, INF, 9},
-        {INF, 5, 7, 9, INF}
-    };
 
     // Start from node 0 for indexing consistency
     visited[0] = 1;

@@ -40,7 +40,7 @@ int main() {
 
     initialize(n);
     printf("The edges of Minimum Cost Spanning Tree are\n");
-    while (ne < n) {
+    while (ne < n-1) {
         for (i = 0, min = INF; i < n; i++) {
             for (j = 0; j < n; j++) {
                 if (cost[i][j] < min && find(i) != find(j)) {

@@ -1,11 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int i, j, k, a, b, u, v, n, ne = 1;
-int parent[10], min, mincost = 0, cost[10][10];
+#define MAX 10
+#define INF 999
 
-void initialize() {
-    for (i = 0; i < n; i++) {
+int parent[MAX], mincost = 0;
+
+int cost[MAX][MAX] = {
+    {INF, 2, INF, 6, INF},
+    {2, INF, 3, 8, 5},
+    {INF, 3, INF, INF, 7},
+    {6, 8, INF, INF, 9},
+    {INF, 5, 7, 9, INF}
+};
+
+void initialize(int n) {
+    for (int i = 0; i < n; i++) {
         parent[i] = 0;
     }
 }
@@ -25,22 +35,13 @@ int uni(int i, int j) {
 }
 
 int main() {
-    system("clear");
-    printf("Enter the number of nodes:");
-    scanf("%d", &n);
-    printf("Enter the adjacency matrix:\n");
-    for (i = 1; i <= n; i++) {
-        for (j = 1; j <= n; j++) {
-            scanf("%d", &cost[i][j]);
-            if (cost[i][j] == 0)
-                cost[i][j] = 999;
-        }
-    }
-    initialize();
+    int i, j, a, b, u, v, n = 5, ne = 1, min;
+
+    initialize(n);
     printf("The edges of Minimum Cost Spanning Tree are\n");
     while (ne < n) {
-        for (i = 1, min = 999; i <= n; i++) {
-            for (j = 1; j <= n; j++) {
+        for (i = 0, min = INF; i < n; i++) {
+            for (j = 0; j < n; j++) {
                 if (cost[i][j] < min) {
                     min = cost[i][j];
                     a = u = i;
@@ -51,10 +52,10 @@ int main() {
         u = find(u);
         v = find(v);
         if (uni(u, v)) {
-            printf("Edge %d:(%d %d) cost:%d\n", ne++, a, b, min);
+            printf("Edge %d:(%d %d) cost:%d\n", ne++, a + 1, b + 1, min);
             mincost += min;
         }
-        cost[a][b] = cost[b][a] = 999;
+        cost[a][b] = cost[b][a] = INF;
     }
     printf("\nMinimum cost = %d\n", mincost);
     return 0;

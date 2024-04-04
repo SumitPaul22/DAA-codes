@@ -4,7 +4,7 @@
 #define MAX 10
 #define INF 999
 
-int parent[MAX], mincost = 0;
+int parent[MAX], rank[MAX], mincost = 0;
 
 int cost[MAX][MAX] = {
     {INF, 2, INF, 6, INF},
@@ -16,14 +16,15 @@ int cost[MAX][MAX] = {
 
 void initialize(int n) {
     for (int i = 0; i < n; i++) {
-        parent[i] = 0;
+        parent[i] = i;
+        rank[i] = 0;
     }
 }
 
 int find(int i) {
-    while (parent[i])
-        i = parent[i];
-    return i;
+    if (i != parent[i])
+        parent[i] = find(parent[i]);
+    return parent[i];
 }
 
 int uni(int i, int j) {
@@ -42,20 +43,17 @@ int main() {
     while (ne < n) {
         for (i = 0, min = INF; i < n; i++) {
             for (j = 0; j < n; j++) {
-                if (cost[i][j] < min) {
+                if (cost[i][j] < min && find(i) != find(j)) {
                     min = cost[i][j];
                     a = u = i;
                     b = v = j;
                 }
             }
         }
-        u = find(u);
-        v = find(v);
         if (uni(u, v)) {
             printf("Edge %d:(%d %d) cost:%d\n", ne++, a + 1, b + 1, min);
             mincost += min;
         }
-        cost[a][b] = cost[b][a] = INF;
     }
     printf("\nMinimum cost = %d\n", mincost);
     return 0;

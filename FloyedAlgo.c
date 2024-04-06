@@ -28,30 +28,26 @@ void floydWarshall() {
     }
 }
 
-int main() {
-    printf("The original matrix:\n");
-    for(i = 0; i < n; i++) {
-        for(j = 0; j < n; j++) {
-            if(graph[i][j] == INF)
+void printMatrix(int mat[MAX][MAX], int size) {
+    for(int i = 0; i < size; i++) {
+        for(int j = 0; j < size; j++) {
+            if(mat[i][j] == INF)
                 printf("%4s", "INF");
             else
-                printf("%4d", graph[i][j]);
+                printf("%4d", mat[i][j]);
         }
         printf("\n");
     }
+}
+
+int main() {
+    printf("The original matrix:\n");
+    printMatrix(graph, n);
     
     floydWarshall();
     
     printf("The shortest distances between every pair of vertices:\n");
-    for(i = 0; i < n; i++) {
-        for(j = 0; j < n; j++) {
-            if(graph[i][j] == INF)
-                printf("%4s", "INF");
-            else
-                printf("%4d", graph[i][j]);
-        }
-        printf("\n");
-    }
+    printMatrix(graph, n);
     
     return 0;
 }

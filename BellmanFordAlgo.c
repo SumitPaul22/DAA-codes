@@ -8,58 +8,62 @@ struct Edge {
     int source, destination, weight;
 };
 
-int main() {
-    int V, E, i, j, u, v, w;
-    printf("Enter number of vertices in the graph: ");
-    scanf("%d", &V);
-    printf("Enter number of edges in the graph: ");
-    scanf("%d", &E);
-    
-    struct Edge edges[E];
-    
-    printf("Enter the source, destination and weight of each edge:\n");
-    for(i = 0; i < E; i++) {
-        scanf("%d%d%d", &edges[i].source, &edges[i].destination, &edges[i].weight);
+void printDistance(int distance[], int V) {
+    printf("Vertex\tDistance from Source\n");
+    for(int i = 0; i < V; i++) {
+        if(distance[i] == INF)
+            printf("%d \t %s\n", i, "INF");
+        else
+            printf("%d \t %d\n", i, distance[i]);
     }
-    
-    int distance[V];
-    
-    for(i = 0; i < V; i++) {
+}
+
+void bellmanFord(struct Edge edges[], int V, int E, int source, int distance[]) {
+    // Initialize distances from source to all other vertices as INFINITE
+    for(int i = 0; i < V; i++) {
         distance[i] = INF;
     }
-    
-    int source;
-    printf("Enter the source vertex: ");
-    scanf("%d", &source);
     distance[source] = 0;
-    
+
     // Relaxation process
-    for(i = 0; i < V - 1; i++) {
-        for(j = 0; j < E; j++) {
-            u = edges[j].source;
-            v = edges[j].destination;
-            w = edges[j].weight;
+    for(int i = 0; i < V - 1; i++) {
+        for(int j = 0; j < E; j++) {
+            int u = edges[j].source;
+            int v = edges[j].destination;
+            int w = edges[j].weight;
             if(distance[u] != INF && distance[u] + w < distance[v]) {
                 distance[v] = distance[u] + w;
             }
         }
     }
-    
+
     // Check for negative weight cycles
-    for(i = 0; i < E; i++) {
-        u = edges[i].source;
-        v = edges[i].destination;
-        w = edges[i].weight;
+    for(int i = 0; i < E; i++) {
+        int u = edges[i].source;
+        int v = edges[i].destination;
+        int w = edges[i].weight;
         if(distance[u] != INF && distance[u] + w < distance[v]) {
             printf("Graph contains negative weight cycle\n");
-            return 0;
+            return;
         }
     }
+}
+
+int main() {
+    int V = 5; // Number of vertices
+    int E = 7; // Number of edges
+    struct Edge edges[] = {
+        {0, 1, -1}, {0, 2, 4},
+        {1, 2, 3}, {1, 3, 2}, {1, 4, 2},
+        {3, 2, 5}, {3, 1, 1},
+        {4, 3, -3}
+    };
+    int distance[V];
+
+    int source = 0; // Source vertex
     
-    printf("Vertex\tDistance from Source\n");
-    for(i = 0; i < V; i++) {
-        printf("%d \t %d\n", i, distance[i]);
-    }
+    bellmanFord(edges, V, E, source, distance);
+    printDistance(distance, V);
     
     return 0;
 }

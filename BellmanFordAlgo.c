@@ -12,9 +12,9 @@ void printDistance(int distance[], int V) {
     printf("Vertex\tDistance from Source\n");
     for(int i = 0; i < V; i++) {
         if(distance[i] == INF)
-            printf("%d \t %s\n", i, "INF");
+            printf("%c \t %s\n", (char)(i + 'A'), "INF");
         else
-            printf("%d \t %d\n", i, distance[i]);
+            printf("%c \t %d\n", (char)(i + 'A'), distance[i]);
     }
 }
 

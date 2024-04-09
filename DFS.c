@@ -13,7 +13,7 @@ int adj[MAX][MAX] = {
 int visited[MAX];
 
 void dfs(int node, int n) {
-    static int isFirst = 1; // To handle the "->" formatting
+    static int isFirst = 1;
     if(isFirst) {
         printf("Visited: ");
         isFirst = 0;
@@ -21,7 +21,7 @@ void dfs(int node, int n) {
         printf("->");
     }
     
-    printf("%c", 'A' + node); // Convert index to letter
+    printf("%c", 'A' + node);
     visited[node] = 1;
 
     for(int i = 0; i < n; i++) {
@@ -39,7 +39,7 @@ int main() {
         visited[i] = 0;
 
     dfs(startNode, n);
-    printf("\n"); // New line after the traversal
+    printf("\n");
 
     return 0;
 }

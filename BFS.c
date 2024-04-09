@@ -18,18 +18,18 @@ void bfs(int startNode, int n) {
     for(int i = 0; i < n; i++) visited[i] = 0;
     
     visited[startNode] = 1;
-    queue[++rear] = startNode; // Enqueue start node
+    queue[++rear] = startNode;
 
     printf("Visited: ");
-    while(front <= rear) { // While queue is not empty
-        currentNode = queue[front++]; // Dequeue a vertex
+    while(front <= rear) {
+        currentNode = queue[front++];
         if(front > 1) printf("->");
-        printf("%c", 'A' + currentNode); // Convert index to letter
+        printf("%c", 'A' + currentNode);
 
         for(int i = 0; i < n; i++) {
             if(adj[currentNode][i] && !visited[i]) {
                 visited[i] = 1;
-                queue[++rear] = i; // Enqueue adjacent nodes
+                queue[++rear] = i;
             }
         }
     }
@@ -37,8 +37,8 @@ void bfs(int startNode, int n) {
 }
 
 int main() {
-    int n = 5; // Number of vertices
-    int startNode = 0; // Starting node for BFS
+    int n = 5;
+    int startNode = 0;
     
     bfs(startNode, n);
     

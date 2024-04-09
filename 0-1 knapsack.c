@@ -6,7 +6,7 @@ int main() {
     printf("Enter the number of elements: ");
     scanf("%d", &n);
 
-    int v[n], wt[n]; // Declaring value and weight arrays
+    int v[n], wt[n];
 
     printf("Enter the weight of knapsack: ");
     scanf("%d", &w);
@@ -18,7 +18,7 @@ int main() {
 
     int p[w+1]; // Declaring profit array
     for(i = 0; i <= w; i++)
-        p[i] = 0; // Initialize with 0 for base case
+        p[i] = 0;
 
     for(i = 0; i < n; i++) {
         for(j = w; j >= wt[i]; j--) {

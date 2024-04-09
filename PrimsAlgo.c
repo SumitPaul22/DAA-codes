@@ -15,11 +15,8 @@ int cost[MAX][MAX] = {
 int main() {
     int b, u, v, n = 5, i, j, ne = 1;
     int visited[MAX] = {0}, min, mincost = 0, a;
-
-    // Start from node 0 for indexing consistency
     visited[0] = 1;
-    printf("The edges of Minimum Cost Spanning Tree are\n");
-    
+    printf("The edges of Minimum Cost Spanning Tree are\n")
     while(ne < n-1) {
         for(i = 0, min = INF; i < n; i++) {
             for(j = 0; j < n; j++) {

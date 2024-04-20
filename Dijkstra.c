@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 #define MAX 10
 #define INF 9999
 
@@ -30,8 +29,7 @@ void dijkstra(struct Edge edges[], int V, int E, int source, int distance[]) {
                 u = i;
         }
         visited[u] = 1;
-
-        // Relaxation process
+        
         for (int j = 0; j < E; j++) {
             int v = edges[j].destination;
             int w = edges[j].weight;
@@ -43,17 +41,17 @@ void dijkstra(struct Edge edges[], int V, int E, int source, int distance[]) {
 }
 
 int main() {
-    int V = 5; // Number of vertices
-    int E = 7; // Number of edges
+    int V = 5;
+    int E = 7;
     struct Edge edges[] = {
-    {0, 1, 1}, {0, 2, 4}, // Edges from vertex A (0)
-    {1, 2, 3}, {1, 3, 2}, {1, 4, 2}, // Edges from vertex B (1)
-    {3, 2, 5}, {3, 1, 1}, // Edges from vertex D (3)
-    {4, 3, 3}  // Edge from vertex E (4)
+    {0, 1, 1}, {0, 2, 4},
+    {1, 2, 3}, {1, 3, 2}, {1, 4, 2},
+    {3, 2, 5}, {3, 1, 1},
+    {4, 3, 3}
     };
     int distance[V];
 
-    int source = 0; // Source vertex
+    int source = 0;
 
     for (int i = 0; i < V; i++) {
         distance[i] = INF;

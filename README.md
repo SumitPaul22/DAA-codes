@@ -1,2 +1,2 @@
 # DAA-codes
-Basic DAA Codes
+Basic Design & Analysis Algorithm Lab Codes for (PCC-CS494)
